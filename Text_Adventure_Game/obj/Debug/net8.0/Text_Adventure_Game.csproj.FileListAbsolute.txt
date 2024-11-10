@@ -1,0 +1,14 @@
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\bin\Debug\net8.0\Text_Adventure_Game.exe
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\bin\Debug\net8.0\Text_Adventure_Game.deps.json
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\bin\Debug\net8.0\Text_Adventure_Game.runtimeconfig.json
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\bin\Debug\net8.0\Text_Adventure_Game.dll
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\bin\Debug\net8.0\Text_Adventure_Game.pdb
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\Text_Adventure_Game.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\Text_Adventure_Game.AssemblyInfoInputs.cache
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\Text_Adventure_Game.AssemblyInfo.cs
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\Text_Adventure_Game.csproj.CoreCompileInputs.cache
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\Text_Adventure_Game.dll
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\refint\Text_Adventure_Game.dll
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\Text_Adventure_Game.pdb
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\Text_Adventure_Game.genruntimeconfig.cache
+C:\Users\minec\Desktop\Programming\C#\Text_Adventure_Game\Text_Adventure_Game\obj\Debug\net8.0\ref\Text_Adventure_Game.dll
