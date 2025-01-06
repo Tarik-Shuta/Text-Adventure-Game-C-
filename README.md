@@ -47,5 +47,5 @@ The game's key components:
 
 ---
 
-Project is done by Tarik Šuta 230302188 for the course Programming Languages
-Inspired by the beautiful city of Sarajevo, Built with C# in Rider
+ - Project is done by Tarik Šuta 230302188 for the course Programming Languages
+      -Inspired by the beautiful city of Sarajevo, Built with C# in Rider
