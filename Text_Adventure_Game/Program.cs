@@ -1,154 +1,241 @@
 ﻿using System;
-using System.Xml.Schema;
+using System.Collections.Generic;
+using System.IO;
+using System.Data;
+using Newtonsoft.Json;
 
 namespace SarajevoShadows
 {
     class Program
     {
-        static bool hasWeapon=false;
-        static bool isAlive = true;
-        static bool hasFriend = false;
-        static string playerName;
+        static bool hasWeapon = false;
+        static bool hasSword = false;
+        static bool gaveBeggarMoney = false;
+        static bool hasAhmed = false;
+        static bool hasKey = false;
+        static Random random = new Random();
+
+        static Dictionary<string, string> gameText;
 
         static void Main(string[] args)
         {
-            
-            Console.WriteLine("Welcome to a text based adventure game - Sarajevo Shadows");
-            Console.WriteLine("You are a resident of Sarajevo, determined to protect your hometown from hooligans");
-            Console.WriteLine("Please enter your name: ");
-            playerName=Console.ReadLine();
-            
-            Console.WriteLine(playerName + " are you ready to play the game?");
-            int choice = GetChoice();
-            if (choice == 2)
-            {
-                Console.WriteLine("Go train more, prepare yourself and then come back!");
-                Environment.Exit(0);
-            }
+            LoadGameData();
+
+            Console.WriteLine(gameText["welcome"]);
+            Console.Write("Enter your name: ");
+            string playerName = Console.ReadLine();
+
+            Console.WriteLine(gameText["mission"].Replace("{playerName}", playerName));
             MarketSquare();
+        }
+
+        static void LoadGameData()
+        {
+            try
+            {
+                string jsonData = File.ReadAllText("GameData.json");
+                gameText = JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonData);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error loading game data: " + ex.Message);
+                Environment.Exit(1);
+            }
         }
 
         static void MarketSquare()
         {
-            Console.WriteLine("\nScene 1: The Market Square");
-            Console.WriteLine("You see some shopkeepers packing up. There’s a broom handle nearby.");
-            Console.WriteLine("1. Help the shopkeepers (Gain information on hooligans).");
-            Console.WriteLine("2. Take the broom handle as a weapon.");
-            int choice = GetChoice();
+            Console.WriteLine(gameText["marketSquare_intro"]);
+            Console.WriteLine(gameText["marketSquare_choices"]);
+            int choice = GetChoice(2);
+
             if (choice == 1)
             {
-                Console.WriteLine("The shopkeepers thank you and inform you that the hooligans are gathering at the Latin Bridge.");
+                Console.WriteLine(gameText["marketSquare_help"]);
+
+                if (random.Next(1, 101) <= 50)
+                {
+                    Console.WriteLine(gameText["marketSquare_key"]);
+                    hasKey = true;
+                }
             }
             else if (choice == 2)
             {
-                Console.WriteLine("You pick up the broom handle as a weapon.");
+                Console.WriteLine(gameText["marketSquare_weapon"]);
                 hasWeapon = true;
             }
-            LatinBridge();
+
+            Console.WriteLine(gameText["marketSquare_next"]);
+            choice = GetChoice(2);
+
+            if (choice == 1)
+                LatinBridge();
+            else if (choice == 2)
+                Sebilj();
         }
 
         static void LatinBridge()
         {
-            Console.WriteLine("\nScene 2: The Latin Bridge");
-            Console.WriteLine("You approach the bridge and hear voices of hooligans nearby.");
-            Console.WriteLine("1. Cross the bridge directly (Risk a confrontation).");
-            Console.WriteLine("2. Take a hidden path along the river Miljacka (Avoid detection).");
-            int choice = GetChoice();
-                    if (choice==1 && !hasWeapon)
-                    {
-                        Console.WriteLine("You try to cross directly, but the hooligans spot you. Without a weapon, you are overpowered.");
-                        isAlive = false;
-                        EndGame();
-                    }
-                    else if (choice==1 && hasWeapon)
-                    {
-                        Console.WriteLine("Armed with the broom handle, you fight off the hooligans and cross safely.");
-                    }
-                    else if (choice == 2)
-                    {
-                        Console.WriteLine("You take the hidden path along the river Miljacka, avoiding detection.");
-                    }
-                    OldTownTavern();
-        }
+            Console.WriteLine(gameText["latinBridge_intro"]);
 
-        static void OldTownTavern()
-        {
-            Console.WriteLine("\nScene 3: The Old Town Tavern");
-            Console.WriteLine("You spot your friend Ahmed in the local tavern. He could be useful in a fight.");
-            Console.WriteLine("1. Ask Ahmed for help (Gain an ally).");
-            Console.WriteLine("2. Continue alone through the alleys (Rely on stealth).");
-            int choice = GetChoice();
-            if (choice == 1)
+            if (hasWeapon)
             {
-                Console.WriteLine("Ahmed agrees to join you. You now have an ally.");
-                hasFriend = true;
-            }
-            else if (choice == 2)
-            {
-                Console.WriteLine("You decide to continue alone, relying on stealth to stay safe.");
-            }
-            CityHall();
-        }
-
-        static void CityHall()
-        {
-            Console.WriteLine("\nScene 4: Sarajevo City Hall (Final Showdown)");
-            Console.WriteLine("You arrive at the City Hall, where hooligans are preparing for a major disturbance.");
-            Console.WriteLine("1. Confront the hooligans directly (Fight them).");
-            Console.WriteLine("2. Signal for police backup (Stall for help).");
-            int choice = GetChoice();
-            if (choice == 1&& !hasFriend)
-            {
-                Console.WriteLine("\nYou face the hooligans alone, but without backup, you are outnumbered and overpowered.");
-                isAlive = false;
-                EndGame();
-            }
-            else if (choice==1 && hasFriend)
-            {
-                Console.WriteLine("\nWith Ahmed by your side, you confront the hooligans and hold them off until they flee.");
-                EndGame();
-            }
-            else if (choice == 2)
-            {
-                Console.WriteLine("\nYou signal for the police, holding the hooligans at bay as best you can.");
-                Console.WriteLine("However, the hooligans become more suspicious of your actions and start closing in on you.");
-                Console.WriteLine("Before the police can arrive, one of the hooligans spots your signal and shouts, alerting the others.");
-                Console.WriteLine("They rush towards you, catching you off guard. You fight back, but you're outnumbered and overwhelmed.");
-                isAlive = false;
-                EndGame();
-                
-            }
-            
-        }
-        
-        
-        static void EndGame()
-        {
-            if (isAlive)
-            {
-                Console.WriteLine("Congratulations! You defended Sarajevo and survived the night.");
+                Console.WriteLine(gameText["latinBridge_fight"]);
+                EndGame(false);
             }
             else
             {
-                Console.WriteLine("Game Over!");
-                Console.WriteLine("You fought bravely but was beaten by hooligans!");
+                Console.WriteLine(gameText["latinBridge_defeat"]);
+                EndGame(false);
             }
-            Console.WriteLine("Thank you for playing Sarajevo Shadows!");
-            Environment.Exit(0);
         }
-         static int GetChoice()
-                    {
-                        int choice;
-                        while (true)
-                        {
-                            Console.Write("Enter 1 or 2: ");
-                            if (int.TryParse(Console.ReadLine(), out choice) && (choice == 1 || choice == 2))
-                                return choice;
-                            else
-                            {
-                                Console.WriteLine("Invalid input. Try again.");
-                            }
-                        }
-                    }
+
+        static void Sebilj()
+        {
+            Console.WriteLine(gameText["sebilj_intro"]);
+            
+            Console.WriteLine("1. Give him 1 mark.\n2. Ignore him.");
+            if (hasKey)
+            {
+                Console.WriteLine("3. Offer the mysterious key.");
+            }
+            
+            int choice = hasKey ? GetChoice(3) : GetChoice(2);
+
+            if (choice == 1)
+            {
+                Console.WriteLine(gameText["sebilj_beggar_yes"]);
+                gaveBeggarMoney = true;
+            }
+            else if (choice == 2)
+            {
+                Console.WriteLine(gameText["sebilj_beggar_no"]);
+            }
+            else if (choice == 3 && hasKey)
+            {
+                Console.WriteLine(gameText["sebilj_beggar_key"]);
+            }
+
+            Console.WriteLine(gameText["sebilj_food"]);
+            choice = GetChoice(2);
+
+            if (choice == 1)
+            {
+                Console.WriteLine(gameText["sebilj_cevapi"]);
+                EndGame(false);
+            }
+            else if (choice == 2)
+            {
+                Console.WriteLine(gameText["sebilj_burek"]);
+
+                Console.WriteLine(gameText["sebilj_ahmed"]);
+                
+                if (hasKey)
+                {
+                    Console.WriteLine(gameText["sebilj_key"]);
+                }
+                choice = hasKey ? GetChoice(3) : GetChoice(2);
+                if (choice == 1)
+                {
+                    Console.WriteLine(gameText["sebilj_ahmed_yes"]);
+                    hasAhmed = true;
+                }
+                else if (choice == 2)
+                {
+                    Console.WriteLine(gameText["sebilj_ahmed_no"]);
+                }
+                else if (choice == 3 && hasKey)
+                {
+                    Console.WriteLine(gameText["sebilj_sword"]);
+                    hasKey = false;
+                    hasSword = true;
+                }
+
+                CityHall();
+            }
+        }
+
+
+        static void CityHall()
+        {
+            Console.WriteLine(gameText["cityHall_intro"]);
+
+            if (hasSword)
+            {
+                Console.WriteLine(gameText["cityHall_sword"]);
+                EndGame(true);
+                return;
+            }
+            if (!hasAhmed)
+            {
+                Console.WriteLine(gameText["cityHall_noAhmed"]);
+                EndGame(false);
+                return;
+            }
+
+            Console.WriteLine(gameText["cityHall_attack"]);
+            int choice = GetChoice(2);
+
+            if (choice == 1)
+            {
+                Console.WriteLine(gameText["cityHall_ahmed"]);
+
+                if (gaveBeggarMoney)
+                {
+                    Console.WriteLine(gameText["cityHall_beggar"]);
+                    EndGame(true);
+                }
+                else
+                {
+                    Console.WriteLine(gameText["cityHall_defeat"]);
+                    EndGame(false);
+                }
+            }
+            else
+            {
+                Console.WriteLine(gameText["cityHall_ambush"]);
+                EndGame(false);
+            }
+        }
+
+        static void EndGame(bool victory)
+        {
+            Console.WriteLine(victory ? gameText["end_victory"] : gameText["end_defeat"]);
+
+            Console.WriteLine(gameText["end_replay"]);
+            int choice = GetChoice(2);
+            if (choice == 1)
+            {
+                ResetGameState();
+                MarketSquare();
+            }
+            else
+            {
+                Console.WriteLine(gameText["end_exit"]);
+                Environment.Exit(0);
+            }
+        }
+
+        static void ResetGameState()
+        {
+            hasWeapon = false;
+            hasSword = false;
+            gaveBeggarMoney = false;
+            hasAhmed = false;
+            hasKey = false;
+        }
+
+        static int GetChoice(int maxOption)
+        {
+            int choice;
+            while (true)
+            {
+                Console.Write("Enter your choice: ");
+                if (int.TryParse(Console.ReadLine(), out choice) && choice >= 1 && choice <= maxOption)
+                    return choice;
+
+                Console.WriteLine($"Invalid input. Please enter a number between 1 and {maxOption}.");
+            }
+        }
     }
 }

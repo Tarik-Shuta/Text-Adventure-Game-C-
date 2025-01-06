@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\minec\\Desktop\\Programming\\C#\\Text_Adventure_Game\\Text_Adventure_Game\\Text_Adventure_Game.csproj": {}
+    "C:\\Users\\minec\\Desktop\\Text-Adventure-Game_C_JSON\\Text_Adventure_Game\\Text_Adventure_Game.csproj": {}
   },
   "projects": {
-    "C:\\Users\\minec\\Desktop\\Programming\\C#\\Text_Adventure_Game\\Text_Adventure_Game\\Text_Adventure_Game.csproj": {
+    "C:\\Users\\minec\\Desktop\\Text-Adventure-Game_C_JSON\\Text_Adventure_Game\\Text_Adventure_Game.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\minec\\Desktop\\Programming\\C#\\Text_Adventure_Game\\Text_Adventure_Game\\Text_Adventure_Game.csproj",
+        "projectUniqueName": "C:\\Users\\minec\\Desktop\\Text-Adventure-Game_C_JSON\\Text_Adventure_Game\\Text_Adventure_Game.csproj",
         "projectName": "Text_Adventure_Game",
-        "projectPath": "C:\\Users\\minec\\Desktop\\Programming\\C#\\Text_Adventure_Game\\Text_Adventure_Game\\Text_Adventure_Game.csproj",
+        "projectPath": "C:\\Users\\minec\\Desktop\\Text-Adventure-Game_C_JSON\\Text_Adventure_Game\\Text_Adventure_Game.csproj",
         "packagesPath": "C:\\Users\\minec\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\minec\\Desktop\\Programming\\C#\\Text_Adventure_Game\\Text_Adventure_Game\\obj\\",
+        "outputPath": "C:\\Users\\minec\\Desktop\\Text-Adventure-Game_C_JSON\\Text_Adventure_Game\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\minec\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

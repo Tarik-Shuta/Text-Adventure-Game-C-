@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "WyHjwVHTQfQ=",
+  "dgSpecHash": "W3croRCrt8M=",
   "success": true,
-  "projectFilePath": "C:\\Users\\minec\\Desktop\\Programming\\C#\\Text_Adventure_Game\\Text_Adventure_Game\\Text_Adventure_Game.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\minec\\Desktop\\Text-Adventure-Game_C_JSON\\Text_Adventure_Game\\Text_Adventure_Game.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\minec\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
